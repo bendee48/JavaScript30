@@ -37,29 +37,55 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const fifteens = inventors.filter(obj => /^15/.test(obj.year));
+    console.table(fifteens);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const names = inventors.map(obj => `${obj.first} ${obj.last}`);
+    console.log(names);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const sortedBirthdates = inventors.sort((a,b) => a.year - b.year);
+    console.table(sortedBirthdates);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const totalYearsLived = inventors.reduce(function(sum, obj){
+      return sum + (obj.passed - obj.year)
+    }, 0);
+    console.log(`Total Years Lived: ${totalYearsLived}`);
 
     // 5. Sort the inventors by years lived
+    const sortedYearsLived = inventors.sort(function(a, b){
+      return (b.passed - b.year) - (a.passed - a.year)
+    });
+    console.table(sortedYearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    const links = Array.from(document.querySelectorAll('.mw-category a'));
+    const des = links.filter(link => link.title.includes('de'))
+                     .map(item => item.title);
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sortedPeople = people.sort();
+    console.log(sortedPeople);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const sumOfItems = data.reduce(function(obj, item) {
+      if (obj[item] === undefined) {
+        obj[item] = 1;
+      } else {
+        obj[item]++
+      }
+      return obj
+    }, {});
+    console.log(sumOfItems);
   </script>
 </body>
 </html>
